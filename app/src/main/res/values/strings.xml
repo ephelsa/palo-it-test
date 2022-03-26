@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Credijusto Test</string>
+
+    <!-- Labels -->
+    <string name="label_welcome">Welcome!</string>
+    <string name="label_welcomeDescription">This a Palo IT/Credijusto test.\nYou\'ll find more information in the README if KDoc isn\'t enough.</string>
+
+    <!-- Content description -->
+    <string name="contentDescription_postDetails">Post details</string>
+    <string name="contentDescription_errorIndicator">Oops! Something went wrong.</string>
 </resources>
