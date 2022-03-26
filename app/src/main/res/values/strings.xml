@@ -4,8 +4,15 @@
     <!-- Labels -->
     <string name="label_welcome">Welcome!</string>
     <string name="label_welcomeDescription">This a Palo IT/Credijusto test.\nYou\'ll find more information in the README if KDoc isn\'t enough.</string>
+    <string name="label_by">by</string>
+    <plurals name="label_peopleCommented">
+        <item quantity="zero">Nobody has commented this.</item>
+        <item quantity="one">has commented this.</item>
+        <item quantity="other">have commented this.</item>
+    </plurals>
 
     <!-- Content description -->
     <string name="contentDescription_postDetails">Post details</string>
     <string name="contentDescription_errorIndicator">Oops! Something went wrong.</string>
+    <string name="contentDescription_navigateToBack">Navigate to back</string>
 </resources>
