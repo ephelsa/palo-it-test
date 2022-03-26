@@ -4,9 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.github.ephelsa.credijustotest.domain.Comment
 import com.github.ephelsa.credijustotest.domain.Post
-import com.github.ephelsa.credijustotest.repository.post.FakePostRepository
+import com.github.ephelsa.credijustotest.repository.post.PostRepository
 import com.github.ephelsa.credijustotest.ui.viewstate.ViewState
-import kotlinx.coroutines.Dispatchers
+import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -14,7 +14,9 @@ import kotlinx.coroutines.launch
 /**
  * ViewModel for [DetailsActivity]
  */
-class DetailsViewModel : ViewModel() {
+class DetailsViewModel @Inject constructor(
+    private val postRepository: PostRepository,
+) : ViewModel() {
     private val _post = MutableStateFlow<ViewState<Post>>(ViewState.Initialized())
     val onPost: StateFlow<ViewState<Post>>
         get() = _post
@@ -31,8 +33,7 @@ class DetailsViewModel : ViewModel() {
         viewModelScope.launch {
             _comments.emit(ViewState.Loading())
 
-            val repository = FakePostRepository(dispatcher = Dispatchers.IO, numberOfData = 10)
-            val result = repository.fetchComments(postId)
+            val result = postRepository.fetchComments(postId)
 
             result.fold(
                 onSuccess = { _comments.emit(ViewState.Success(it)) },

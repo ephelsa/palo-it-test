@@ -4,17 +4,21 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.viewModels
 import androidx.compose.foundation.ExperimentalFoundationApi
 import com.github.ephelsa.credijustotest.domain.Post
 import com.github.ephelsa.credijustotest.model.PostParcelable
 import com.github.ephelsa.credijustotest.ui.screens.details.DetailsActivity
 import com.github.ephelsa.credijustotest.ui.theme.CredijustoTestTheme
 import com.github.ephelsa.credijustotest.ui.utils.Constants
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @ExperimentalFoundationApi
+@AndroidEntryPoint
 class PostsActivity : ComponentActivity() {
-    private val viewModel: PostsViewModel by viewModels()
+
+    @Inject
+    internal lateinit var viewModel: PostsViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -3,17 +3,20 @@ package com.github.ephelsa.credijustotest.ui.screens.details
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.viewModels
 import androidx.compose.foundation.ExperimentalFoundationApi
 import com.github.ephelsa.credijustotest.domain.Post
 import com.github.ephelsa.credijustotest.model.PostParcelable
 import com.github.ephelsa.credijustotest.ui.theme.CredijustoTestTheme
 import com.github.ephelsa.credijustotest.ui.utils.Constants
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @ExperimentalFoundationApi
+@AndroidEntryPoint
 class DetailsActivity : ComponentActivity() {
 
-    private val viewModel: DetailsViewModel by viewModels()
+    @Inject
+    internal lateinit var viewModel: DetailsViewModel
     private val post: Post
         get() = intent.extras!!.getParcelable<PostParcelable>(Constants.Extra.POST_EXTRA)!!.toDomain()
 

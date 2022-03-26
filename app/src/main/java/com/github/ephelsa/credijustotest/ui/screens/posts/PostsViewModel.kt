@@ -6,6 +6,7 @@ import com.github.ephelsa.credijustotest.domain.Post
 import com.github.ephelsa.credijustotest.repository.post.FakePostRepository
 import com.github.ephelsa.credijustotest.repository.post.PostRepository
 import com.github.ephelsa.credijustotest.ui.viewstate.ViewState
+import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -14,7 +15,9 @@ import kotlinx.coroutines.launch
 /**
  * ViewModel for [PostsActivity]
  */
-class PostsViewModel : ViewModel() {
+class PostsViewModel @Inject constructor(
+    private val postRepository: PostRepository,
+) : ViewModel() {
     private val _posts = MutableStateFlow<ViewState<List<Post>>>(ViewState.Initialized())
     val onPosts: StateFlow<ViewState<List<Post>>>
         get() = _posts
@@ -26,9 +29,7 @@ class PostsViewModel : ViewModel() {
         viewModelScope.launch {
             _posts.emit(ViewState.Loading())
 
-            // TODO: Replace this call with the real when the view-flow is done.
-            val repository = FakePostRepository(Dispatchers.IO)
-            val result = repository.fetchPosts()
+            val result = postRepository.fetchPosts()
 
             result.fold(
                 onSuccess = { _posts.emit(ViewState.Success(it)) },
