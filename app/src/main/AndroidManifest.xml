@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CredijustoTest">
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.screens.posts.PostsActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.CredijustoTest">
