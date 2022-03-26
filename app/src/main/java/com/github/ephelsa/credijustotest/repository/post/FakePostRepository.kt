@@ -1,5 +1,6 @@
 package com.github.ephelsa.credijustotest.repository.post
 
+import com.github.ephelsa.credijustotest.domain.Comment
 import com.github.ephelsa.credijustotest.domain.Post
 import com.github.ephelsa.credijustotest.domain.User
 import kotlinx.coroutines.CoroutineDispatcher
@@ -21,19 +22,37 @@ class FakePostRepository(
 
     override suspend fun fetchPosts(): Result<List<Post>> = withContext(dispatcher) {
         delay(1_000)
-        Result.success((1..numberOfData).map(::createFakeData))
+        Result.success((1..numberOfData).map(::createPost))
     }
 
-    private fun createFakeData(id: Int): Post {
-        return  Post(
+    override suspend fun fetchComments(postId: Int): Result<List<Comment>> = withContext(dispatcher) {
+        delay(1_000)
+        val result = (1..numberOfData).map { id ->
+            createComment(postId, id)
+        }
+        Result.success(result)
+    }
+
+    private fun createPost(id: Int): Post {
+        return Post(
             id = id,
             user = User(
                 id = id,
-                name = "User $id",
+                name = "User #$id",
                 username = "user.$id",
             ),
-            title = "Post $id",
+            title = "Post #$id",
             body = "Post Body $id",
         )
+    }
+
+    private fun createComment(postId: Int, id: Int): Comment {
+        return Comment(
+            postId = postId,
+            id = id,
+            email = "example@email.com",
+            name = "Title #$id",
+            body = "Comment $id"
+        );
     }
 }
