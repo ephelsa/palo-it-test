@@ -1,7 +1,8 @@
 package com.github.ephelsa.credijustotest.di
 
-import com.github.ephelsa.credijustotest.repository.post.FakePostRepository
+import com.github.ephelsa.credijustotest.datasource.remote.post.RemotePostDatasource
 import com.github.ephelsa.credijustotest.repository.post.PostRepository
+import com.github.ephelsa.credijustotest.repository.post.PostRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,7 +16,12 @@ object RepositoryModule {
 
     @Singleton
     @Provides
-    internal fun providePostRepository(): PostRepository {
-        return FakePostRepository(dispatcher = Dispatchers.IO, numberOfData = 10)
+    internal fun providePostRepository(
+        remotePostDatasource: RemotePostDatasource,
+    ): PostRepository {
+        return PostRepositoryImpl(
+            dispatcher = Dispatchers.IO,
+            remotePostDatasource = remotePostDatasource,
+        )
     }
 }
