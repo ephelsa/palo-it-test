@@ -1,6 +1,7 @@
 package com.github.ephelsa.credijustotest.datasource.remote
 
 import io.ktor.client.HttpClient
+import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.engine.android.Android
 import io.ktor.client.features.defaultRequest
 import io.ktor.client.features.json.JsonFeature
@@ -22,7 +23,7 @@ object KtorConfig {
      * Contains a base URL for requests to [http//jsonplaceholder.typicode.com],
      * json serialization (and setup) and a basic response observer (aka dummy response log).
      */
-    fun client() = HttpClient(Android) {
+    fun client(engine: HttpClientEngine = Android.create()) = HttpClient(engine) {
         defaultRequest {
             url {
                 protocol = URLProtocol.HTTP
