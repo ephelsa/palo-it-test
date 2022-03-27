@@ -40,6 +40,7 @@ fun PostItem(post: Post, onClick: VoidCallback) {
             horizontalArrangement = Arrangement.SpaceBetween,
         ) {
             Text(
+                modifier = Modifier.fillMaxWidth(0.9f),
                 text = post.title,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
