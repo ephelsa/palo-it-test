@@ -2,11 +2,19 @@ package com.github.ephelsa.credijustotest.repository.post
 
 import com.github.ephelsa.credijustotest.domain.Comment
 import com.github.ephelsa.credijustotest.domain.Post
+import kotlinx.coroutines.CoroutineDispatcher
 
 /**
  * Repository to manipulate post stuff related.
  */
 interface PostRepository {
+    /**
+     * [CoroutineDispatcher] to confine the coroutine executions to a specific thread.
+     *
+     * Useful for unit tests too.
+     */
+    val dispatcher: CoroutineDispatcher
+
 
     /**
      * Fetch a list of [Post] in a safety way wrapping the results in [Result].
@@ -20,5 +28,5 @@ interface PostRepository {
      *
      * @param postId ID of the post to fetch the comments.
      */
-    suspend fun fetchComments(postId: Int): Result<List<Comment>>
+    suspend fun fetchCommentsByPost(postId: Int): Result<List<Comment>>
 }

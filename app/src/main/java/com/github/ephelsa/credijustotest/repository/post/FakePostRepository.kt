@@ -11,12 +11,12 @@ import kotlinx.coroutines.withContext
  * Fake implementation of [PostRepository] useful for tests or to manipulate [Post]
  * data in a controlled environment.
  *
- * @property dispatcher used to confine the coroutine executions to a specific thread.
- * @property numberOfData when a method returns a list of something, this describes how many
+ * @param dispatcher see [PostRepository] for more information.
+ * @param numberOfData when a method returns a list of something, this describes how many
  * items are required.
  */
 class FakePostRepository(
-    private val dispatcher: CoroutineDispatcher,
+    override val dispatcher: CoroutineDispatcher,
     private val numberOfData: Int = 5,
 ) : PostRepository {
 
@@ -25,7 +25,7 @@ class FakePostRepository(
         Result.success((1..numberOfData).map(::createPost))
     }
 
-    override suspend fun fetchComments(postId: Int): Result<List<Comment>> = withContext(dispatcher) {
+    override suspend fun fetchCommentsByPost(postId: Int): Result<List<Comment>> = withContext(dispatcher) {
         delay(1_000)
         val result = (1..numberOfData).map { id ->
             createComment(postId, id)

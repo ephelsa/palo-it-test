@@ -33,7 +33,7 @@ class DetailsViewModel @Inject constructor(
         viewModelScope.launch {
             _comments.emit(ViewState.Loading())
 
-            val result = postRepository.fetchComments(postId)
+            val result = postRepository.fetchCommentsByPost(postId)
 
             result.fold(
                 onSuccess = { _comments.emit(ViewState.Success(it)) },
