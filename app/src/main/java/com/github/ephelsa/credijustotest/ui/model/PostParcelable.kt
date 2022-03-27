@@ -1,4 +1,4 @@
-package com.github.ephelsa.credijustotest.model
+package com.github.ephelsa.credijustotest.ui.model
 
 import android.os.Bundle
 import android.os.Parcelable

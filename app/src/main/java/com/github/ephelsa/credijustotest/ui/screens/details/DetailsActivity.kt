@@ -5,7 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.ExperimentalFoundationApi
 import com.github.ephelsa.credijustotest.domain.Post
-import com.github.ephelsa.credijustotest.model.PostParcelable
+import com.github.ephelsa.credijustotest.ui.model.PostParcelable
 import com.github.ephelsa.credijustotest.ui.theme.CredijustoTestTheme
 import com.github.ephelsa.credijustotest.ui.utils.Constants
 import dagger.hilt.android.AndroidEntryPoint
