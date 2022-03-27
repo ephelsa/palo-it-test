@@ -3,6 +3,8 @@ package com.github.ephelsa.credijustotest.di
 import com.github.ephelsa.credijustotest.datasource.remote.KtorConfig
 import com.github.ephelsa.credijustotest.datasource.remote.post.RemotePostDatasource
 import com.github.ephelsa.credijustotest.datasource.remote.post.RemotePostDatasourceImpl
+import com.github.ephelsa.credijustotest.datasource.remote.user.RemoteUserDatasource
+import com.github.ephelsa.credijustotest.datasource.remote.user.RemoteUserDatasourceImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -21,6 +23,14 @@ object RemoteDatasourceModule {
     internal fun provideRemotePostDatasource(
         client: HttpClient,
     ): RemotePostDatasource = RemotePostDatasourceImpl(
+        dispatcher = Dispatchers.IO,
+        client = client,
+    )
+
+    @Provides
+    internal fun provideRemoteUserDatasource(
+        client: HttpClient,
+    ): RemoteUserDatasource = RemoteUserDatasourceImpl(
         dispatcher = Dispatchers.IO,
         client = client,
     )
