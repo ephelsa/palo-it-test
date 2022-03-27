@@ -158,7 +158,7 @@ private fun Comments(commentsViewState: ViewState<List<Comment>>) {
         contentAlignment = Alignment.TopCenter
     ) {
         when (commentsViewState) {
-            is ViewState.Error -> ErrorIndicator()
+            is ViewState.Error -> ErrorIndicator(commentsViewState.throwable)
             is ViewState.Loading, is ViewState.Initialized -> CircularProgressIndicator()
             is ViewState.Success -> {
                 CommentList(comments = commentsViewState.data)

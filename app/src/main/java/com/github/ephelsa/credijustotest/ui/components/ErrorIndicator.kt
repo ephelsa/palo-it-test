@@ -1,5 +1,6 @@
 package com.github.ephelsa.credijustotest.ui.components
 
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -15,12 +16,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.github.ephelsa.credijustotest.R
 import com.github.ephelsa.credijustotest.ui.theme.LightGray
+import com.github.ephelsa.credijustotest.ui.utils.Constants
 
 /**
  * Error composable to display when something unexpected occurs interacting with data.
  */
 @Composable
-fun ErrorIndicator() {
+fun ErrorIndicator(e: Throwable?) {
     Column(
         modifier = Modifier
             .fillMaxWidth(),
@@ -37,5 +39,7 @@ fun ErrorIndicator() {
             text = stringResource(id = R.string.contentDescription_errorIndicator),
             color = LightGray,
         )
+
+        Log.e(Constants.Tag.ERROR_TAG, "Exception from ErrorIndicator", e)
     }
 }

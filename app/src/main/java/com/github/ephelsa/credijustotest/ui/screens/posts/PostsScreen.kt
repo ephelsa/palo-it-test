@@ -37,7 +37,7 @@ fun PostsScreen(viewModel: PostsViewModel, onPostClick: PostCallback) {
             contentAlignment = Alignment.Center,
         ) {
             when (state) {
-                is ViewState.Error -> ErrorIndicator()
+                is ViewState.Error -> ErrorIndicator((state as ViewState.Error).throwable)
                 is ViewState.Loading, is ViewState.Initialized -> CircularProgressIndicator()
                 is ViewState.Success -> {
                     PostList(
