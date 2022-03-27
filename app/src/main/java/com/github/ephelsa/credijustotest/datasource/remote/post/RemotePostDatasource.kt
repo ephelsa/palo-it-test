@@ -1,6 +1,7 @@
 package com.github.ephelsa.credijustotest.datasource.remote.post
 
 import com.github.ephelsa.credijustotest.datasource.remote.json.PostJSON
+import com.github.ephelsa.credijustotest.datasource.remote.json.CommentJSON
 import kotlinx.coroutines.CoroutineDispatcher
 
 /**
@@ -28,5 +29,5 @@ interface RemotePostDatasource {
      *
      * @param postId id of a post
      */
-    suspend fun fetchCommentsByPost(postId: Int)
+    suspend fun fetchCommentsByPost(postId: Int): List<CommentJSON>
 }

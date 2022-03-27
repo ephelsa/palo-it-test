@@ -1,5 +1,6 @@
 package com.github.ephelsa.credijustotest.repository.post
 
+import com.github.ephelsa.credijustotest.datasource.remote.json.CommentJSON
 import com.github.ephelsa.credijustotest.datasource.remote.post.RemotePostDatasource
 import com.github.ephelsa.credijustotest.domain.Comment
 import com.github.ephelsa.credijustotest.domain.Post
@@ -43,6 +44,15 @@ class PostRepositoryImpl(
     }
 
     override suspend fun fetchCommentsByPost(postId: Int): Result<List<Comment>> {
-        TODO("Not yet implemented")
+        return try {
+            val response = coroutineScope {
+                async(dispatcher) { remotePostDatasource.fetchCommentsByPost(postId) }
+            }
+            val mapped = response.await().map(CommentJSON::toDomain)
+
+            return Result.success(mapped)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
     }
 }
